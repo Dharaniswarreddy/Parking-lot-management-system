@@ -1,0 +1,17 @@
+create database parking_lot_db;
+USE parking_lot_db;
+
+CREATE TABLE IF NOT EXISTS parking_slots (
+    slot_id INT AUTO_INCREMENT PRIMARY KEY,
+    slot_number VARCHAR(10) UNIQUE NOT NULL,
+    is_occupied BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS vehicles (
+    vehicle_id INT AUTO_INCREMENT PRIMARY KEY,
+    license_plate VARCHAR(20) UNIQUE NOT NULL,
+    slot_id INT,
+    entry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    exit_time TIMESTAMP NULL,
+    FOREIGN KEY (slot_id) REFERENCES parking_slots(slot_id)
+);
